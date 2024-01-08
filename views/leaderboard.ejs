@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G2 dalībnieki</title>
+  <!-- Link to Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .table {
+      margin-top: 20px;
+    }
+
+    .negative-difference td {
+      background-color: #ccffcc; /* Change to your desired color for negative differences */
+    }
+
+    .positive-difference td {
+      background-color: #ffcccc; /* Change to your desired color for positive differences */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-4">G2 dalībnieki</h1>
+    <h4>Kopā zaudētie kg šonedēļ: <%= Math.abs(totalWeightLossCurrentWeek).toFixed(1) %> kg</h4>
+    <h4>Kopā zaudētie kg: <%= Math.abs(totalDifference).toFixed(1) %> kg</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Vārds</th>
+          <th>Šonedēļ</th>
+          <th>Iepriekš. ned.</th>
+          <th>Ned. starpība</th>
+          <th>Sākuma svars</th>
+          <th>Kopējā atšķirība</th>
+          <th>Sods</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (const user of users) { %>
+          <tr class="<%= user.isNegativeDifference ? 'negative-difference' : 'positive-difference' %>">
+            <td><%= user.name %></td>
+            <td><%= user.currentWeekWeight !== null ? user.currentWeekWeight : '-' %></td>
+            <td><%= user.lastWeekWeight !== null ? user.lastWeekWeight : '-' %></td>
+            <td><%= user.differenceLastWeek !== null ? user.differenceLastWeek : '-' %></td>
+            <td><%= user.initialWeight !== null ? user.initialWeight : '-' %></td>
+            <td><%= user.totalDifference !== null ? user.totalDifference : '-' %></td>
+            <td><%= user.penaltyPoints !== null ? user.penaltyPoints : '-' %></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <a href="/" class="btn btn-primary">Uz sākumu</a>
+  </div>
+
+  <!-- Link to Bootstrap JS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
